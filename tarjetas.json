@@ -1,0 +1,37 @@
+[
+{"tarjeta":{
+			"id": 1,
+			"numeroTarjeta": 4546-8574-1856-5565,
+			"pin": 4345,
+			"saldo": 40555
+			}
+},
+{"tarjeta":{
+			"id": 2,
+			"numeroTarjeta": 5595-3458-9989-7125,
+			"pin": 1595,
+			"saldo": 3566
+			}
+},
+{"tarjeta":{
+			"id": 3,
+			"numeroTarjeta": 4858-6696-5887-1578,
+			"pin": 1234,
+			"saldo": 23
+			}
+},
+{"tarjeta":{
+			"id": 4,
+			"numeroTarjeta": 5854-6656-2587-1547,
+			"pin": 4345,
+			"saldo": 300
+			}
+},
+{"tarjeta":{
+			"id": 5,
+			"numeroTarjeta": 4546-9896-2357-1478,
+			"pin": 0023,
+			"saldo": 35621
+			}
+}
+]
