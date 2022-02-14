@@ -27,9 +27,27 @@ public class TarjetaEntity {
 
     private Double saldo;
 
-
-    @OneToMany(mappedBy = "tarjetaOrigen", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TransaccionEntity> transacciones = new ArrayList<>();
 
+
+    public void descontarSaldo(Double monto){
+        this.saldo-=monto;
+    }
+
+    public void agregarSaldo(Double monto){
+        this.saldo+=monto;
+    }
+
+    public void agregarTransaccion(TransaccionEntity entity){
+        transacciones.add(entity);
+    }
+
+    public Boolean puedeTransferir(Double monto) {
+        if (monto <= this.saldo) {
+            return true;
+        }
+        return false;
+    }
 
 }

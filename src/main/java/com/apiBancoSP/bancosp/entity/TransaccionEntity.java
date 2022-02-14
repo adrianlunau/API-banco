@@ -30,6 +30,11 @@ public class TransaccionEntity {
     private LocalDate fecha;
 
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "tarjeta_destino", insertable = false, updatable = false)
+        private TarjetaEntity tarjetaDestino;
 
-    private String tarjetaDestino;
+    @Column(name = "tarjeta_destino", nullable = false)
+    private String nroTarjetaDestino;
+
 }

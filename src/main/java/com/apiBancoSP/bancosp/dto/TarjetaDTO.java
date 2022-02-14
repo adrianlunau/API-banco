@@ -18,4 +18,6 @@ public class TarjetaDTO {
     private Double saldo;
     private List<TransaccionDTO> transacciones = new ArrayList<>();
 
+
 }
+
