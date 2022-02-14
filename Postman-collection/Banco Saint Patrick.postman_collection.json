@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "9858648e-ba45-4899-8621-55940898bc5f",
+		"name": "Banco Saint Patrick",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get tarjeta 3",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get tarjeta 4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ODU4LTY2OTYtNTg4Ny0xNTc4IiwiZXhwIjoxNjQ0NzM1NTg3LCJpYXQiOjE2NDQ2OTk1ODd9.gN_nbJy7JJz1YxMV9Xa3rs7X7Wck1P86QvFZCYtqSs8",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/tarjeta",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tarjeta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"4546-8574-1856-5565\",\r\n    \"password\": \"4345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva transaccion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tarjetaDestino\": \"4858-6696-5887-1578\",\r\n    \"monto\": \"20000\"    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/transaccion",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"transaccion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ultimas 10 transacciones",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
