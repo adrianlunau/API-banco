@@ -16,8 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TarjetaServiceImpl implements TarjetaService {
@@ -36,15 +35,17 @@ public class TarjetaServiceImpl implements TarjetaService {
     private TransaccionRepository transaccionRepository;
 
     @Override
-    public TarjetaDTO getDetails(String nroTarjeta) {
-        Optional<TarjetaEntity> entity = tarjetaRepository.findById(nroTarjeta);
+    public TarjetaDTO getDetails() {
+        String username = sessionManager.getUsernameFromSecurityContext();
+        Optional<TarjetaEntity> entity = tarjetaRepository.findById(username);
         TarjetaDTO result = tarjetaMapper.tarjetaEntity2DTO(entity.get());
         return result;
     }
 
     @Override
-    public Double getSaldo(String nroTarjeta) {
-        Optional<TarjetaEntity> entity = tarjetaRepository.findById(nroTarjeta);
+    public Double getSaldo() {
+        String username = sessionManager.getUsernameFromSecurityContext();
+        Optional<TarjetaEntity> entity = tarjetaRepository.findById(username);
         Double saldo = entity.get().getSaldo();
         return saldo;
     }
@@ -53,8 +54,14 @@ public class TarjetaServiceImpl implements TarjetaService {
     public List<TransaccionDTO> getTransacciones() {
         String username = sessionManager.getUsernameFromSecurityContext();
         Pageable pageable = PageRequest.of(0,10);
-        List<TransaccionEntity> entities = tarjetaRepository.findLastTenTransaction(username, pageable);
-        List<TransaccionDTO> dtos = transaccionMapper.transaccionEntityList2DTO(entities);
+        List<TransaccionEntity> salientes = tarjetaRepository.findLastTenTransaccionesSalientes(username, pageable);
+        List<TransaccionEntity> entrantes = tarjetaRepository.findLastTenTransaccionesEntrantes(username, pageable);
+        List<TransaccionEntity> sumArrays = new ArrayList<>();
+        sumArrays.addAll(entrantes);
+        sumArrays.addAll(salientes);
+        Collections.sort(sumArrays);
+        List<TransaccionDTO> dtos = transaccionMapper.transaccionEntityList2DTO(sumArrays.subList(0,10));
+
         return dtos;
     }
 }

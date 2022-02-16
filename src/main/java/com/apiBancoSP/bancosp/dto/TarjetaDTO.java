@@ -16,7 +16,8 @@ public class TarjetaDTO {
     private Long cliente;
     private Integer pin;
     private Double saldo;
-    private List<TransaccionDTO> transacciones = new ArrayList<>();
+    private List<TransaccionDTO> transaccionesEntrantes = new ArrayList<>();
+    private List<TransaccionDTO> transaccionesSalientes = new ArrayList<>();
 
 
 }

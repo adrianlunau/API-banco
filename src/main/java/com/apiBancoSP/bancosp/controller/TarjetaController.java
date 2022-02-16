@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.List;
 
 @RestController
@@ -25,18 +24,15 @@ public class TarjetaController {
     private JWTUtils jwtUtils;
 
     @GetMapping
-    public ResponseEntity<TarjetaDTO> getDetails(HttpServletRequest request){
-        String jwt = request.getHeader("Authorization");
-        String nroTarjeta = jwtUtils.extractUsername(jwt.substring(7));
-        TarjetaDTO tarjeta = tarjetaService.getDetails(nroTarjeta);
+    public ResponseEntity<TarjetaDTO> getDetails(){
+        TarjetaDTO tarjeta = tarjetaService.getDetails();
         return ResponseEntity.status(HttpStatus.OK).body(tarjeta);
     }
 
     @GetMapping("/saldo")
-    public ResponseEntity<Double> getSaldo(HttpServletRequest request){
-        String jwt = request.getHeader("Authorization");
-        String nroTarjeta = jwtUtils.extractUsername(jwt.substring(7));
-        Double saldo = tarjetaService.getSaldo(nroTarjeta);
+    public ResponseEntity<Double> getSaldo(){
+
+        Double saldo = tarjetaService.getSaldo();
         return ResponseEntity.status(HttpStatus.OK).body(saldo);
     }
 

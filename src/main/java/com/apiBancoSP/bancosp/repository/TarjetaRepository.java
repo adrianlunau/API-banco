@@ -14,6 +14,9 @@ import java.util.List;
 @Repository
 public interface TarjetaRepository extends JpaRepository<TarjetaEntity, String> {
 
-    @Query(value = "select t.transacciones from TarjetaEntity t where t.nroDeCuenta = :nroTarjeta order by fecha desc")
-    List<TransaccionEntity> findLastTenTransaction(@Param("nroTarjeta") String nroTarjeta, Pageable pageable);
+    @Query(value = "select t.transaccionesSalientes from TarjetaEntity t where t.nroDeCuenta = :nroTarjeta order by fecha")
+    List<TransaccionEntity> findLastTenTransaccionesSalientes(@Param("nroTarjeta") String nroTarjeta, Pageable pageable);
+
+    @Query(value = "select t.transaccionesEntrantes from TarjetaEntity t where t.nroDeCuenta = :nroTarjeta order by fecha")
+    List<TransaccionEntity> findLastTenTransaccionesEntrantes(@Param("nroTarjeta") String nroTarjeta, Pageable pageable);
 }

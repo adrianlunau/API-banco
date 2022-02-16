@@ -40,13 +40,19 @@ public class TransaccionServiceImpl implements TransaccionService {
         origen.get().descontarSaldo(dto.getMonto());
         destino.get().agregarSaldo(dto.getMonto());
 
+        entity.setTarjetaOrigen(origen.get());
+        entity.setTarjetaOrigen(destino.get());
+
         TransaccionEntity transaccionGuardada = transaccionRepository.save(entity);
 
-        origen.get().agregarTransaccion(transaccionGuardada);
-        destino.get().agregarTransaccion(transaccionGuardada);
+        origen.get().agregarTransaccionSaliente(transaccionGuardada);
+        destino.get().agregarTransaccionEntrante(transaccionGuardada);
 
-        TarjetaEntity origenSaved = tarjetaRepository.save(origen.get());
-        TarjetaEntity destinoSaved = tarjetaRepository.save(destino.get());
+
+        //TarjetaEntity origenSaved = tarjetaRepository.save(origen.get());
+        //TarjetaEntity destinoSaved = tarjetaRepository.save(destino.get());
+
+
 
         TransaccionDTO result = transaccionMapper.transaccionEntity2DTO(transaccionGuardada);
         return result;

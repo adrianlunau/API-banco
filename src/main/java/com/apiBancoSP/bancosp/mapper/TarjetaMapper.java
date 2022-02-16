@@ -19,7 +19,8 @@ public class TarjetaMapper {
         dto.setNroDeCuenta(entity.getNroDeCuenta());
         dto.setPin(entity.getPin());
         dto.setSaldo(entity.getSaldo());
-        dto.setTransacciones(transaccionMapper.transaccionEntityList2DTO(entity.getTransacciones()));
+        dto.setTransaccionesEntrantes(transaccionMapper.transaccionEntityList2DTO(entity.getTransaccionesEntrantes()));
+        dto.setTransaccionesSalientes(transaccionMapper.transaccionEntityList2DTO(entity.getTransaccionesSalientes()));
 
         return dto;
     }

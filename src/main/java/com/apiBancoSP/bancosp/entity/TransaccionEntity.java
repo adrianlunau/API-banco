@@ -11,11 +11,12 @@ import java.time.LocalDate;
 @Table(name = "transaccion")
 @Getter
 @Setter
-public class TransaccionEntity {
+public class TransaccionEntity implements Comparable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTransaccion;
+
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "tarjeta_origen", insertable = false, updatable = false)
@@ -37,4 +38,18 @@ public class TransaccionEntity {
     @Column(name = "tarjeta_destino", nullable = false)
     private String nroTarjetaDestino;
 
+    @Override
+    public int compareTo(Object o) {
+
+        TransaccionEntity t2 = (TransaccionEntity) o;
+        int respuesta = 0;
+
+        if (this.getFecha().isBefore(t2.getFecha()))
+            respuesta = 1;
+
+        if (this.getFecha().isAfter(t2.getFecha()))
+            respuesta = -1;
+
+        return respuesta;
+    }
 }

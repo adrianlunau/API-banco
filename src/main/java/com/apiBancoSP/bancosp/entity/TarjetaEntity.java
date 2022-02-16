@@ -16,6 +16,7 @@ public class TarjetaEntity {
     @Id
     private String nroDeCuenta;
 
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private ClienteEntity cliente;
@@ -27,8 +28,13 @@ public class TarjetaEntity {
 
     private Double saldo;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TransaccionEntity> transacciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "tarjetaDestino",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransaccionEntity> transaccionesEntrantes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "tarjetaOrigen",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransaccionEntity> transaccionesSalientes = new ArrayList<>();
+
 
 
     public void descontarSaldo(Double monto){
@@ -39,9 +45,13 @@ public class TarjetaEntity {
         this.saldo+=monto;
     }
 
-    public void agregarTransaccion(TransaccionEntity entity){
-        transacciones.add(entity);
+    public void agregarTransaccionEntrante(TransaccionEntity entity){
+        transaccionesEntrantes.add(entity);
     }
+
+    public void agregarTransaccionSaliente(TransaccionEntity entity) { transaccionesSalientes.add(entity); }
+
+
 
     public Boolean puedeTransferir(Double monto) {
         if (monto <= this.saldo) {

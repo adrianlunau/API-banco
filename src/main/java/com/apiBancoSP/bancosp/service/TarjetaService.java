@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface TarjetaService {
 
-    TarjetaDTO getDetails(String nroTarjeta);
+    TarjetaDTO getDetails();
 
-    Double getSaldo(String nroTarjeta);
+    Double getSaldo();
 
     List<TransaccionDTO> getTransacciones();
 }
